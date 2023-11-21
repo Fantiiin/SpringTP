@@ -1,4 +1,5 @@
-package com.example.demo;
+package com.example;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,4 +17,7 @@ public class DemoApplication {
     public String hello() {
       return "Hello le monde !";
     }
+
+
+	
 }
