@@ -3,6 +3,7 @@ package com.example.accessingdatamysql;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,4 +46,26 @@ public class ControleurPrincipal {
   public @ResponseBody Iterable<Article> getAllArticles() {
     return articleRepository.findAll();
   }
+
+  @GetMapping(path="/user")
+  public String redirectToUserList() {
+    return "redirect:/user/list";
+  }
+  
+  @GetMapping(path="/articles")
+  public String redirectToArticleList() {
+    return "redirect:/articles/list";
+  }
+  
+  @GetMapping(path="/user/{id}")
+  public @ResponseBody Iterable<Article> getArticlesByUser(@PathVariable("id") Integer userId) {
+    String author = String.valueOf(userId);
+    return articleRepository.findByAuthor(author);
+  }
+  
+  @GetMapping(path="/articles/{id}")
+  public @ResponseBody Article getArticleById(@PathVariable("id") Integer articleId) {
+    return articleRepository.findById(articleId).orElse(null);
+  }
+
 }
