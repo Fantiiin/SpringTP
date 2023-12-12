@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -66,6 +67,17 @@ public class ControleurPrincipal {
   @GetMapping(path="/articles/{id}")
   public @ResponseBody Article getArticleById(@PathVariable("id") Integer articleId) {
     return articleRepository.findById(articleId).orElse(null);
+  }
+
+  @PutMapping(path="/articles/modifier/{id}")
+  public @ResponseBody String modifierArticle(@RequestBody ModifierArticleCommande request, @PathVariable("id") Integer articleId) {
+    String title = request.getTitle();
+    String author = request.getAuthor();
+    Article article = articleRepository.findById(articleId).orElse(null);
+    article.setTitle(title);
+    article.setAuthor(author);
+    articleRepository.save(article);
+    return "Article modifié dans la base de données !";
   }
 
 }

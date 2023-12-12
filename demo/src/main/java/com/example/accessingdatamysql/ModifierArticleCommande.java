@@ -3,15 +3,19 @@ package com.example.accessingdatamysql;
 public class ModifierArticleCommande {
     private String title;
     private String author;
-    private String date;
+    private Integer idArticle;
 
-    public ModifierArticleCommande(String title, String author, String date){
+    public ModifierArticleCommande(String title, String author, Integer idArticle){
         this.title = title;
         this.author = author;
-        this.date = date;
+        this.idArticle = idArticle;
     }
 
     public ModifierArticleCommande(){
+    }
+
+    public Integer getId() {
+        return idArticle;
     }
 
     public String getTitle() {
@@ -20,11 +24,6 @@ public class ModifierArticleCommande {
 
     public String getAuthor() {
         return author;
-    }
-
-
-    public String getDate() {
-        return date;
     }
 
 }
