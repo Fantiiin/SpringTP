@@ -2,10 +2,14 @@ package com.example.accessingdatamysql;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Article {
@@ -23,6 +27,16 @@ public class Article {
     return idArticle;
   }
 
+  @ManyToMany(cascade = CascadeType.ALL)
+  @JoinTable(name = "like_article",
+          joinColumns = @JoinColumn(name = "article_id"),
+          inverseJoinColumns = @JoinColumn(name = "utilisateur_id"))
+  private java.util.List<User> likes;
+
+  public java.util.List<User> getLikes() {
+    return likes;
+  } 
+  
   public void setIdArticle(Integer idArticle) {
     this.idArticle = idArticle;
   }
